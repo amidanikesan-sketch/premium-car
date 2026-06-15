@@ -19,7 +19,7 @@
     slider.style.setProperty("--pos", "50%");
     slider.innerHTML =
       buildImg(pair.after, "После", "ba__after") +
-      '<div class="ba__before">' + buildImg(pair.before, "До", "") + "</div>" +
+      buildImg(pair.before, "До", "ba__before") +
       '<span class="ba__label ba__label--before">До</span>' +
       '<span class="ba__label ba__label--after">После</span>' +
       '<div class="ba__handle" id="baHandle"><span class="ba__grip" aria-hidden="true">' +

@@ -134,7 +134,7 @@
   .features-grid { grid-template-columns: 1fr; }
   .stats-row { grid-template-columns: repeat(2, 1fr); gap: var(--space-32) var(--space-24); }
   .form-row { grid-template-columns: 1fr; }
-  .ba { aspect-ratio: 4 / 5; }
+  .ba { aspect-ratio: 4 / 3; }
 }
 
 @media (max-width: 420px) {
