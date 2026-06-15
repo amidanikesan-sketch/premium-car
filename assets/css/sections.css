@@ -1,0 +1,142 @@
+/* ============================================================
+   CRYSTAL AUTO — Section layouts & responsive
+   ============================================================ */
+
+/* ---------- HERO ---------- */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  padding-bottom: clamp(40px, 7vw, 80px);
+}
+.hero__bg { position: absolute; inset: 0; z-index: -2; }
+.hero__bg video, .hero__bg img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: saturate(0.7) contrast(1.05) brightness(0.78);
+}
+.hero__scrim {
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.35) 38%, rgba(0,0,0,0.55) 100%),
+    radial-gradient(120% 70% at 75% 30%, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 100%);
+}
+.hero__inner { width: 100%; }
+.hero__eyebrow { margin-bottom: 26px; display: inline-flex; align-items: center; gap: 12px; }
+.hero__title { max-width: 16ch; }
+.hero__title em { font-style: italic; color: var(--text-2); }
+.hero__sub { margin-top: 28px; max-width: 52ch; color: var(--text-2); font-size: clamp(1rem, 1.4vw, 1.125rem); }
+.hero__actions { margin-top: 38px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.hero__meta {
+  margin-top: clamp(40px, 6vw, 64px);
+  display: flex; flex-wrap: wrap; gap: clamp(28px, 5vw, 64px);
+  padding-top: 28px; border-top: 1px solid var(--line-hair);
+}
+.hero__meta-item { display: flex; flex-direction: column; gap: 4px; }
+.hero__meta-item b { font-size: clamp(1.5rem, 3vw, 2rem); font-weight: var(--fw-medium); letter-spacing: -0.03em; font-family: var(--font-display); }
+.hero__meta-item span { font-size: 13px; color: var(--text-3); letter-spacing: -0.01em; }
+.hero__scroll { position: absolute; left: 50%; bottom: 26px; transform: translateX(-50%); z-index: 2; }
+@media (max-width: 760px) { .hero__scroll { display: none; } }
+
+/* ---------- Manifesto ---------- */
+.manifesto__lead {
+  font-family: var(--font-display);
+  font-weight: var(--fw-display);
+  font-size: clamp(1.6rem, 4.2vw, 3rem);
+  line-height: 1.18;
+  letter-spacing: -0.03em;
+  color: var(--color-chalk);
+  max-width: 22ch;
+}
+.manifesto__lead .dim { color: var(--text-3); }
+.manifesto__grid {
+  display: grid; gap: clamp(32px, 5vw, 64px);
+  grid-template-columns: 1.2fr 0.8fr; align-items: end;
+}
+.stats-row {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-24);
+  margin-top: var(--section-gap);
+  border-top: 1px solid var(--line-hair);
+  padding-top: clamp(40px, 5vw, 56px);
+}
+
+/* ---------- Services ---------- */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--gap);
+}
+
+/* ---------- Before / After ---------- */
+.ba-layout { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 44px); }
+.ba-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.ba-caption { margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; align-items: center; }
+
+/* ---------- Process ---------- */
+.process-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 96px); align-items: start; }
+.process-media { position: sticky; top: calc(var(--header-h) + 24px); }
+.process-video {
+  width: 100%; border-radius: var(--radius-lg); overflow: hidden;
+  aspect-ratio: 4 / 5; object-fit: cover; box-shadow: var(--shadow-xl);
+  filter: saturate(0.8) brightness(0.92);
+}
+
+/* ---------- Why us ---------- */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+
+/* ---------- Inverted panel ---------- */
+.inverted-band { padding: clamp(48px, 7vw, 88px); display: grid; grid-template-columns: 1fr 0.7fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+
+/* ---------- Testimonials ---------- */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+
+/* ---------- FAQ ---------- */
+.faq-layout { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
+.faq-aside { position: sticky; top: calc(var(--header-h) + 24px); }
+
+/* ---------- Booking ---------- */
+.booking-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+.booking-form { display: flex; flex-direction: column; gap: var(--space-20); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-16); }
+.booking-aside { display: flex; flex-direction: column; gap: var(--space-32); }
+.booking-aside__media { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; box-shadow: var(--shadow-xl); }
+.booking-aside__media video { width: 100%; height: 100%; object-fit: cover; filter: saturate(0.8) brightness(0.9); }
+
+/* ---------- Map / contacts ---------- */
+.contact-layout { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(40px, 6vw, 80px); align-items: start; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1080px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .services-grid > *:nth-child(1) { grid-column: span 2; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .testi-grid { grid-template-columns: 1fr; }
+  .process-layout { grid-template-columns: 1fr; }
+  .process-media { position: relative; top: 0; max-width: 460px; }
+  .faq-layout { grid-template-columns: 1fr; }
+  .faq-aside { position: relative; top: 0; }
+  .booking-layout { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+  .inverted-band { grid-template-columns: 1fr; }
+  .manifesto__grid { grid-template-columns: 1fr; align-items: start; }
+}
+
+@media (max-width: 760px) {
+  .nav__links { display: none; }
+  .nav__right .btn { display: none; }
+  .burger { display: inline-flex; }
+  .services-grid { grid-template-columns: 1fr; }
+  .services-grid > * , .services-grid > *:nth-child(1) { grid-column: auto; }
+  .features-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); gap: var(--space-32) var(--space-24); }
+  .form-row { grid-template-columns: 1fr; }
+  .ba { aspect-ratio: 4 / 5; }
+}
+
+@media (max-width: 420px) {
+  .stats-row { grid-template-columns: 1fr 1fr; }
+}

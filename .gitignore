@@ -1,0 +1,20 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / deps (на случай добавления тулинга позже)
+node_modules/
+npm-debug.log*
+*.log
+
+# Локальные секреты / переопределения конфига (НЕ коммитить ключи!)
+assets/js/config.local.js
+.env
+.env.*

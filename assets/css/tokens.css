@@ -1,0 +1,90 @@
+/* ============================================================
+   CRYSTAL AUTO — Design Tokens
+   Visual system: "Sequel" — cinematic dark, 100% achromatic.
+   Source of truth: DESIGN.md / variables.css / tokens.json
+   ============================================================ */
+
+:root {
+  /* ----- Colors ----- */
+  --color-void-black: #000000; /* page canvas */
+  --color-carbon:     #202020; /* elevated surface, cards, modals */
+  --color-graphite:   #333333; /* hairline borders, dividers */
+  --color-bone:       #c0c0c0; /* mid-neutral text, secondary meta */
+  --color-smoke:      #999999; /* muted helper text, disabled */
+  --color-ash:        #b3b3b3; /* tertiary body, captions over imagery */
+  --color-fog:        #cccccc; /* quaternary text, light-section dividers */
+  --color-chalk:      #ffffff; /* primary headlines, body, icon fills */
+  --color-linen:      #f5f5f0; /* warm off-white — inverted panels */
+
+  /* Semantic aliases */
+  --bg:            var(--color-void-black);
+  --surface:       var(--color-carbon);
+  --border:        var(--color-graphite);
+  --text:          var(--color-chalk);
+  --text-2:        var(--color-bone);
+  --text-3:        var(--color-smoke);
+  --text-invert:   var(--color-void-black);
+
+  /* Translucent layers (derived, still achromatic) */
+  --glass-08:  rgba(255, 255, 255, 0.08);
+  --glass-04:  rgba(255, 255, 255, 0.04);
+  --glass-12:  rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.10);
+  --line-hair: rgba(255, 255, 255, 0.06);
+  --scrim:     rgba(0, 0, 0, 0.55);
+
+  /* ----- Typography — families ----- */
+  /* Bradford -> editorial display serif. Free substitute: Fraunces. */
+  --font-display: 'Fraunces', 'Bradford', 'Tiempos Headline', Georgia, 'Times New Roman', serif;
+  /* VisueltPro -> geometric grotesque UI. Free substitute: Inter. */
+  --font-sans: 'Inter', 'VisueltPro', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ----- Typography — scale ----- */
+  --text-caption: 12px;   --leading-caption: 1.5;  --tracking-caption: 0.36px;
+  --text-body-sm: 14px;   --leading-body-sm: 1.5;  --tracking-body-sm: -0.28px;
+  --text-body: 18px;      --leading-body: 1.4;     --tracking-body: -0.36px;
+  --text-subheading: 22px;--leading-subheading: 1.4;--tracking-subheading: -0.44px;
+  --text-heading: 32px;   --leading-heading: 1.2;  --tracking-heading: -1.6px;
+  --text-heading-lg: 58px;--leading-heading-lg: 1.05;--tracking-heading-lg: -2.9px;
+  --text-display: 128px;  --leading-display: 1;    --tracking-display: -6.4px;
+
+  /* Fluid display clamps (desktop -> mobile) */
+  --fluid-display: clamp(3rem, 9vw, 8rem);        /* ~48px -> 128px */
+  --fluid-heading-lg: clamp(2.25rem, 5.5vw, 3.625rem); /* ~36px -> 58px */
+  --fluid-heading: clamp(1.75rem, 3.5vw, 2rem);   /* ~28px -> 32px */
+
+  /* ----- Weights ----- */
+  --fw-light: 300;
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-display: 460; /* sculptural display weight */
+
+  /* ----- Spacing (base unit 4px) ----- */
+  --space-4: 4px;   --space-8: 8px;   --space-12: 12px; --space-16: 16px;
+  --space-20: 20px; --space-24: 24px; --space-28: 28px; --space-32: 32px;
+  --space-40: 40px; --space-64: 64px; --space-80: 80px; --space-96: 96px;
+
+  /* ----- Layout ----- */
+  --page-max: 1280px;
+  --page-pad: clamp(20px, 5vw, 64px);
+  --section-gap: clamp(72px, 11vw, 160px);
+  --card-pad: 19px;
+  --gap: 16px;
+
+  /* ----- Radius ----- */
+  --radius-lg: 10px;   /* cards, images */
+  --radius-full: 9999px; /* pills */
+
+  /* ----- Shadows ----- */
+  --shadow-xl: rgba(0, 0, 0, 0.35) 0px 10px 30px 0px, rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset;
+  --shadow-lg: rgba(0, 0, 0, 0.15) 0px 4px 20px 0px;
+
+  /* ----- Motion ----- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0.05, 0.36, 1);
+  --dur-fast: 240ms;
+  --dur: 600ms;
+  --dur-slow: 1100ms;
+
+  --header-h: 76px;
+}
