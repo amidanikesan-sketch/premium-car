@@ -1,0 +1,5 @@
+# Папка для фото «До/После». Загрузите сюда 6 файлов:
+# seat-before.jpg / seat-after.jpg
+# floor-before.jpg / floor-after.jpg
+# door-before.jpg / door-after.jpg
+# (имена настраиваются в assets/js/config.js -> beforeAfter)
