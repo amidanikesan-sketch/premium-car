@@ -69,6 +69,10 @@
   gap: var(--gap);
 }
 
+/* ---------- Pricing ---------- */
+.pricing-layout { display: grid; grid-template-columns: 1.45fr 0.55fr; gap: var(--gap); align-items: start; }
+.pricing-promos { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); margin-top: var(--gap); }
+
 /* ---------- Before / After ---------- */
 .ba-layout { display: grid; grid-template-columns: 1fr; gap: clamp(28px, 4vw, 44px); }
 .ba-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; }
@@ -123,6 +127,7 @@
   .contact-layout { grid-template-columns: 1fr; }
   .inverted-band { grid-template-columns: 1fr; }
   .manifesto__grid { grid-template-columns: 1fr; align-items: start; }
+  .pricing-layout { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
@@ -135,6 +140,7 @@
   .stats-row { grid-template-columns: repeat(2, 1fr); gap: var(--space-32) var(--space-24); }
   .form-row { grid-template-columns: 1fr; }
   .ba { aspect-ratio: 4 / 3; }
+  .pricing-promos { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 420px) {

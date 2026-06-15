@@ -23,7 +23,9 @@
     clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>',
     star: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17.8 6.1 20.8l1.2-6.6L2.5 9l6.6-.9L12 2z"/></svg>',
     arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
-    expand: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>'
+    expand: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M8 7l-4 5 4 5M16 7l4 5-4 5"/></svg>',
+    gift: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="8" width="18" height="5" rx="1"/><path d="M5 13v8h14v-8M12 8v13"/><path d="M12 8S10.5 3.5 8 4.5 9.5 8 12 8zM12 8s1.5-4.5 4-3.5S14.5 8 12 8z"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M5 12.5l4.5 4.5L19 7"/></svg>'
   };
   window.CRYSTAL_ICONS = ICONS;
 
@@ -38,6 +40,7 @@
       address: c.address || "",
       addressNote: c.addressNote || "",
       hours: c.hours || "",
+      social: c.social || "",
       year: (CFG.legal && CFG.legal.year) || new Date().getFullYear()
     };
     $$("[data-bind]").forEach(function (el) {
@@ -45,11 +48,12 @@
       if (key === "privacy") { el.setAttribute("href", (CFG.legal && CFG.legal.privacyUrl) || "#"); return; }
       if (map[key] != null && map[key] !== "") el.textContent = map[key];
     });
-    // href bindings (tel:/mailto:)
+    // href bindings
     $$("[data-href]").forEach(function (el) {
       var key = el.getAttribute("data-href");
       if (key === "phone") el.setAttribute("href", "tel:" + (c.phoneHref || "").replace(/\s/g, ""));
-      if (key === "email") el.setAttribute("href", "mailto:" + (c.email || ""));
+      else if (key === "email") el.setAttribute("href", "mailto:" + (c.email || ""));
+      else if (c[key]) el.setAttribute("href", c[key]); // instagram / vk / telegram / whatsapp
     });
   }
 
@@ -127,6 +131,56 @@
         "</div>";
       grid.appendChild(card);
     });
+  }
+
+  /* ---------- Прейскурант ---------- */
+  function renderPricing() {
+    var p = CFG.pricing;
+    if (!p) return;
+
+    var main = $("#pricingMain");
+    if (main) {
+      var cols = p.complexColumns || [];
+      var thead = "<thead><tr>" + cols.map(function (c, i) {
+        return "<th" + (i === 0 ? "" : ' class="num-h"') + ">" + c + "</th>";
+      }).join("") + "</tr></thead>";
+      var rows = (p.complexRows || []).map(function (r) {
+        return "<tr><td class=\"cls\">" + r.cls + "<small>" + r.note + "</small></td>" +
+          '<td class="num std">' + r.standard + "</td>" +
+          '<td class="num prem">' + r.premium + "</td></tr>";
+      }).join("");
+      var legend = (p.packages || []).map(function (pk) {
+        return "<p><b>" + pk.name + "</b> — " + pk.desc + "</p>";
+      }).join("");
+      main.innerHTML =
+        '<h3 class="price-card__title">' + p.complexTitle + "</h3>" +
+        '<div class="price-table-wrap"><table class="price-table">' + thead + "<tbody>" + rows + "</tbody></table></div>" +
+        (legend ? '<div class="price-legend">' + legend + "</div>" : "");
+    }
+
+    var ex = $("#pricingExtras");
+    if (ex) {
+      var items = (p.extras || []).map(function (e) {
+        return '<div class="extra-row"><span class="extra-row__name">' + e.name +
+          '</span><span class="extra-row__dots" aria-hidden="true"></span><span class="extra-row__price">' + e.price + "</span></div>";
+      }).join("");
+      var notes = (p.notes || []).map(function (n) {
+        return '<li class="price-note"><span class="price-note__i">' + ICONS.check + "</span><span>" + n + "</span></li>";
+      }).join("");
+      ex.innerHTML =
+        '<h3 class="price-card__title">' + (p.extrasTitle || "Дополнительные услуги") + "</h3>" +
+        '<div class="extras-list">' + items + "</div>" +
+        (notes ? '<h4 class="price-subtitle">' + (p.notesTitle || "Важно знать") + '</h4><ul class="price-notes">' + notes + "</ul>" : "");
+    }
+
+    var promos = $("#pricingPromos");
+    if (promos) {
+      promos.innerHTML = (p.promos || []).map(function (pr) {
+        var icon = ICONS[pr.icon] || ICONS.shield;
+        return '<div class="promo-card"><span class="promo-card__icon">' + icon + "</span>" +
+          '<div><h4 class="promo-card__title">' + pr.title + '</h4><p class="promo-card__text">' + pr.text + "</p></div></div>";
+      }).join("");
+    }
   }
 
   /* ---------- Процесс ---------- */
@@ -210,21 +264,24 @@
     var channels = "";
     if (c.whatsapp) channels += '<a href="' + c.whatsapp + '" target="_blank" rel="noopener">WhatsApp</a>';
     if (c.telegram) channels += '<a href="' + c.telegram + '" target="_blank" rel="noopener">Telegram</a>';
-    if (c.instagram) channels += '<a href="' + c.instagram + '" target="_blank" rel="noopener">Instagram</a>';
+    if (c.instagram) channels += '<a href="' + c.instagram + '" target="_blank" rel="noopener">Instagram' + (c.social ? " · " + c.social : "") + "</a>";
+    if (c.vk) channels += '<a href="' + c.vk + '" target="_blank" rel="noopener">ВКонтакте</a>';
     if (!channels) channels = '<p class="muted">Соцсети — добавьте в config.js</p>';
+
+    var emailLine = c.email ? '<a href="mailto:' + c.email + '">' + c.email + "</a>" : "";
 
     cols.innerHTML =
       '<div class="footer__col"><h4>Навигация</h4>' + navCol + "</div>" +
       '<div class="footer__col"><h4>Контакты</h4>' +
         '<a href="tel:' + (c.phoneHref || "") + '">' + (c.phone || "") + "</a>" +
-        '<a href="mailto:' + (c.email || "") + '">' + (c.email || "") + "</a>" +
+        emailLine +
         "<p>" + (c.address || "") + "</p>" +
         "<p>" + (c.hours || "") + "</p>" +
       "</div>" +
       '<div class="footer__col"><h4>Студия</h4>' +
         '<a href="#booking" data-scroll>Записаться</a>' +
+        '<a href="#pricing" data-scroll>Цены</a>' +
         '<a href="#works" data-scroll>Работы</a>' +
-        '<a href="#faq" data-scroll>Вопросы</a>' +
       "</div>" +
       '<div class="footer__col"><h4>Мы на связи</h4>' + channels + "</div>";
   }
@@ -382,6 +439,7 @@
     renderNav();
     renderStats();
     renderServices();
+    renderPricing();
     renderProcess();
     renderFeatures();
     renderReviews();

@@ -41,6 +41,8 @@
     var html = "";
     if (C.whatsapp) html += '<a class="btn btn--ghost" href="' + C.whatsapp + '" target="_blank" rel="noopener">WhatsApp</a>';
     if (C.telegram) html += '<a class="btn btn--ghost" href="' + C.telegram + '" target="_blank" rel="noopener">Telegram</a>';
+    if (C.instagram) html += '<a class="btn btn--ghost" href="' + C.instagram + '" target="_blank" rel="noopener">Instagram</a>';
+    if (C.vk) html += '<a class="btn btn--ghost" href="' + C.vk + '" target="_blank" rel="noopener">ВКонтакте</a>';
     wrap.innerHTML = html;
   }
 
